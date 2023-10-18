@@ -140,3 +140,27 @@ Widget edit_Profile_Page_Container() {
     ],
   );
 }
+
+Widget cardTaskDetails(){
+  return SizedBox(
+    width: 100.w,
+    child: Card(
+
+      color: Colors.white70,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          "Flutter is an open-source UI software"
+              " development kit created by Google. It is used to develop cross platform applications from a single codebase for any web",
+          style: TextStyle(
+              fontSize: 10.sp,
+              fontWeight: FontWeight.w500,
+              color: Colors.black54),
+        ),
+      ),
+    ),
+  );
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanagerapp/UserScreens/taskViewPage.dart';
 import 'package:taskmanagerapp/constants/color_constants.dart';
 import 'package:taskmanagerapp/controller/get_user_task_list_controller.dart';
 
@@ -52,7 +53,13 @@ class _MyTaskPageState extends State<MyTaskPage> {
                                   backgroundColor: MaterialStateProperty.all(
                                       appThemeColor3)),
                               child: const Text("Accept"),
-                              onPressed: () {},
+                              onPressed: (){
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (context){
+                                      return TaskViewPage();
+                                    })
+                                );
+                              },
                             ),
                             title: Text(
                               user_task_data.data[index].title.toString(),

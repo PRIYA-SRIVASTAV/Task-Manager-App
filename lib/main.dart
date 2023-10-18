@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
               appBarTheme: const AppBarTheme(
                 toolbarHeight: 70,
               ),
-              primaryColor: appThemeColor),
+              primaryColor:  appThemeColor),
           home:  SplashScreenPage(),
         );
       },

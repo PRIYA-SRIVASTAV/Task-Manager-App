@@ -19,7 +19,11 @@ class SplashScreenPage extends StatefulWidget {
 class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
   void initState() {
-    routingFunction();
+    // routingFunction();
+    Timer(
+        const Duration(seconds: 3),
+            () => Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => Welcome_Page())));
     super.initState();
   }
 
@@ -47,39 +51,39 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     );
   }
 
-  void routingFunction() async {
-    var token;
-    var user_type;
-    await getPref().then((value) {
-      token = value.getString(keyToken);
-    });
-    await getPref().then((value) {
-      user_type = value.getString(KEY_USER_TYPE);
-    });
-    if (token.toString() != "keyToken" &&
-        token.toString() != "null" &&
-        user_type == "ADMIN_TRUE") {
-      Timer(
-          const Duration(seconds: 3),
-          () => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>  Admin_Home_Page())));
-    } else if (token.toString() != "keyToken" &&
-        token.toString() != "null" &&
-        user_type == "USER_TRUE") {
-      Timer(
-          const Duration(seconds: 3),
-          () => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => /*Welcome_Page()*/
-                      User_HomePageScreen())));
-    } else {
-      Timer(
-          const Duration(seconds: 3),
-          () => Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => Welcome_Page())));
-    }
-  }
+  // void routingFunction() async {
+  //   var token;
+  //   var user_type;
+  //   await getPref().then((value) {
+  //     token = value.getString(keyToken);
+  //   });
+  //   await getPref().then((value) {
+  //     user_type = value.getString(KEY_USER_TYPE);
+  //   });
+  //   if (token.toString() != "keyToken" &&
+  //       token.toString() != "null" &&
+  //       user_type == "ADMIN_TRUE") {
+  //     Timer(
+  //         const Duration(seconds: 3),
+  //         () => Navigator.pushReplacement(
+  //             context,
+  //             MaterialPageRoute(
+  //                 builder: (context) =>  Admin_Home_Page())));
+  //   } else if (token.toString() != "keyToken" &&
+  //       token.toString() != "null" &&
+  //       user_type == "USER_TRUE") {
+  //     Timer(
+  //         const Duration(seconds: 3),
+  //         () => Navigator.pushReplacement(
+  //             context,
+  //             MaterialPageRoute(
+  //                 builder: (context) => /*Welcome_Page()*/
+  //                     User_HomePageScreen())));
+  //   } else {
+  //     Timer(
+  //         const Duration(seconds: 3),
+  //         () => Navigator.pushReplacement(context,
+  //             MaterialPageRoute(builder: (context) => Welcome_Page())));
+  //   }
+  // }
 }
