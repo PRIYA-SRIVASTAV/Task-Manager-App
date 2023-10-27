@@ -71,7 +71,7 @@ class _Admin_CreateEmployeePageState extends State<Admin_CreateEmployeePage> {
   Widget createEmployeeForm() {
     return Dialog(
         child: Container(
-      height: 600.h,
+      height: 100.h,
       child: Stack(
         // alignment: Alignment.topRight,
         children: [

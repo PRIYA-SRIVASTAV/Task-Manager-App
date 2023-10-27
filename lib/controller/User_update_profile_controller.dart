@@ -25,7 +25,7 @@ class User_Update_profile_data_controller {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => User_HomePageScreen(),
+            builder: (context) => User_ProfilePage(),
           ));
     }
   }

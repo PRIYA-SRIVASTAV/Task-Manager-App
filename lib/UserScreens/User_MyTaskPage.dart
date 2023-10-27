@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:sizer/sizer.dart';
+import 'package:taskmanagerapp/UserScreens/User_task_details_page.dart';
 import 'package:taskmanagerapp/constants/color_constants.dart';
 import 'package:taskmanagerapp/controller/get_user_task_list_controller.dart';
-
 import '../model/get_user_task_list_model.dart';
+import 'CustomDrawer.dart';
 
 class MyTaskPage extends StatefulWidget {
   const MyTaskPage({super.key});
@@ -16,71 +19,319 @@ class _MyTaskPageState extends State<MyTaskPage> {
   bool is_load_task_list = false;
 
   @override
-  void initState() {
-    super.initState();
-    fetch_uaser_task();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+      length: 3,
+      // initialIndex: widget.TabIndex,
+      child: Scaffold(
         //backgroundColor: appThemeColor,
         appBar: AppBar(
-          title: const Text("Your Tasks"),
+          elevation: 0.0,
+          title: Text(
+            "My Tasks",
+          ),
+          leading: Builder(
+            builder: (context) =>
+                IconButton(
+                  icon: const Icon(Icons.menu), // Icon to represent the drawer
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer(); // Open the drawer
+                  },
+                ),
+          ),
           backgroundColor: appThemeColor,
-          leading: const Icon(Icons.task_outlined),
-          elevation: 15,
         ),
-        body: is_load_task_list
-            ? SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height,
-                    decoration: const BoxDecoration(color: Colors.white),
-                    child: ListView.builder(
-                        itemCount: user_task_data.data.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            leading: Text(
-                              user_task_data.data[index].id.toString(),
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                            trailing: ElevatedButton(
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      appThemeColor3)),
-                              child: const Text("Accept"),
-                              onPressed: () {},
-                            ),
-                            title: Text(
-                              user_task_data.data[index].title.toString(),
-                              style: TextStyle(
-                                  color: appThemeColor2,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            subtitle: Text(
-                              "Duration : ${user_task_data.data[index].duration.toString()}",
-                              style: TextStyle(color: appThemeColor),
-                            ),
-                          );
-                        }),
-                    // Center(
-                    //     child: Text(
-                    //   'No tasks available',
-                    //   style: TextStyle(color: Colors.black54),
-                    // )),
+        //drawer: const AppDrawer(),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Container(
+                  height: 5.h,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(25.h),
+                  ),
+                  child: TabBar(
+                    labelStyle:
+                        TextStyle(fontSize: 9.sp, fontWeight: FontWeight.bold),
+                    indicator: BoxDecoration(
+                      color: appThemeColor,
+                      borderRadius: BorderRadius.circular(25.h),
+                    ),
+                    labelColor: Colors.white,
+                    unselectedLabelColor: Colors.grey,
+                    tabs: const [
+                      Tab(
+                        text: 'All Task',
+                      ),
+                      Tab(
+                        text: 'Pending Task',
+                      ),
+                      Tab(
+                        text: 'Completed Task',
+                      ),
+                    ],
                   ),
                 ),
-              )
-            : Center(
-                child: Center(child: Text("Task not found !!!"),),
-              ));
+                SizedBox(
+                  height: 2.h,
+                ),
+                SizedBox(
+                  height: 70.h,
+                  width: 100.w,
+                  child: TabBarView(
+                    children: [
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics()),
+                        itemCount: 15,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const User_task_details_page(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: appThemeColor.withOpacity(0.2),
+                                ),
+                                width: double.infinity,
+                                height: 10.h,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 1.5.h, horizontal: 5.w),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Lorem Ipsum Task',
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 2.h,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons.calendar_month),
+                                                SizedBox(
+                                                  width: 1.w,
+                                                ),
+                                                Text("23-10-2023")
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                    Icons
+                                                    .low_priority_outlined),
+                                                SizedBox(
+                                                  width: 1.w,
+                                                ),
+                                                Text("High")
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics()),
+                        itemCount:3,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const User_task_details_page(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: appThemeColor.withOpacity(0.2),
+                                ),
+                                width: double.infinity,
+                                height: 10.h,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 1.5.h, horizontal: 5.w),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Lorem Ipsum Task',
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 2.h,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons.calendar_month),
+                                                SizedBox(
+                                                  width: 1.w,
+                                                ),
+                                                Text("23-10-2023")
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons
+                                                    .low_priority_outlined),
+                                                SizedBox(
+                                                  width: 1.w,
+                                                ),
+                                                Text("High")
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics()),
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const User_task_details_page(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: appThemeColor.withOpacity(0.2),
+                                ),
+                                width: double.infinity,
+                                height: 10.h,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 1.5.h, horizontal: 5.w),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Lorem Ipsum Task',
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 2.h,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons.calendar_month),
+                                                SizedBox(
+                                                  width: 1.w,
+                                                ),
+                                                Text("23-10-2023")
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons
+                                                    .low_priority_outlined),
+                                                SizedBox(
+                                                  width: 1.w,
+                                                ),
+                                                Text("High")
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   void fetch_uaser_task() async {
-    user_task_data = await get_user_task_list_controller().get_user_task_list_controller_method();
+    user_task_data = await get_user_task_list_controller()
+        .get_user_task_list_controller_method();
     if (user_task_data.status.toString() == "200") {
       setState(() {
         is_load_task_list = true;

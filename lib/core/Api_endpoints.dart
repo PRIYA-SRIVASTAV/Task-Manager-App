@@ -16,7 +16,8 @@ class ApiEndpoints {
   static String User_dashboard_Url = "$baseUrl/user-status/";
   static String User_task_list_Url = "$baseUrl/user-task-list/";
   static String Admin_task_list_Url = "$baseUrl/admin-task-list/";
-  static String get_Admin_User_details_Url = "$baseUrl/user-details/";
+  static String get_User_details_Url = "$baseUrl/user-details/";
+  static String get_Admin_details_Url = "$baseUrl/admin-details/";
 
   /// delete apis
   static String delete_admin_task = "$baseUrl/task-delete/";

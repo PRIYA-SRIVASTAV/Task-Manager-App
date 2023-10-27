@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
-import 'package:taskmanagerapp/UserScreens/User_Profile_Page.dart';
 import 'package:taskmanagerapp/UserScreens/User_HomePage.dart';
 import 'package:taskmanagerapp/controller/get_User_Details_controller.dart';
 import '../constants/Pref_constants.dart';
@@ -377,10 +376,7 @@ class _edit_PageState extends State<edit_Page> {
                             width: 35.w,
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => User_HomePageScreen()),
-                                );
+                              Navigator.pop(context);
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: appThemeColor2,

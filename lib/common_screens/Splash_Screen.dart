@@ -20,6 +20,15 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
   void initState() {
     routingFunction();
+    // Timer(
+    //   const Duration(seconds: 3),
+    //       () => Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => Welcome_Page(),
+    //     ),
+    //   ),
+    // );
     super.initState();
   }
 
@@ -27,11 +36,11 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: Center(
-        child: Stack(
-          children: [
-            Splash_screen_background_image(),
-            Positioned(
+        body: Center(
+          child: Stack(
+            children: [
+              Splash_screen_background_image(),
+              Positioned(
                 bottom: 3.h,
                 left: 5.h,
                 child: Text(
@@ -40,10 +49,12 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                       fontWeight: FontWeight.bold,
                       fontSize: 26.sp,
                       color: appThemeColor),
-                ))
-          ],
+                ),
+              ),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 
@@ -61,25 +72,31 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
         user_type == "ADMIN_TRUE") {
       Timer(
           const Duration(seconds: 3),
-          () => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>  Admin_Home_Page())));
+          () => Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => Admin_Home_Page())));
     } else if (token.toString() != "keyToken" &&
         token.toString() != "null" &&
         user_type == "USER_TRUE") {
       Timer(
-          const Duration(seconds: 3),
-          () => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => /*Welcome_Page()*/
-                      User_HomePageScreen())));
+        const Duration(seconds: 3),
+        () => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => /*Welcome_Page()*/
+                User_HomePageScreen(),
+          ),
+        ),
+      );
     } else {
       Timer(
-          const Duration(seconds: 3),
-          () => Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => Welcome_Page())));
+        const Duration(seconds: 3),
+        () => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Welcome_Page(),
+          ),
+        ),
+      );
     }
   }
 }

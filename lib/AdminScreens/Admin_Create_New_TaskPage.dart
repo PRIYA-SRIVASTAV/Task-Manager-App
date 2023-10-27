@@ -165,6 +165,7 @@ class _Admin_Create_New_TaskState extends State<Admin_Create_New_Task> {
                       height: 0.5.h,
                     ),
                     TextFormField(
+                      maxLength: 150,
                       controller: descriptionController,
                       decoration: const InputDecoration(
                         hintText: "Enter task description",

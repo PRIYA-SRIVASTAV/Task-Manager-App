@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../constants/color_constants.dart';
+import 'CustomDrawer.dart';
+
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
 
@@ -21,11 +24,22 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Calendar View"),
-        backgroundColor: Theme.of(context).primaryColor,
-        leading: const Icon(Icons.calendar_month_outlined),
-        elevation: 15,
+        elevation: 0.0,
+        title: Text(
+          "My Tasks",
+        ),
+        leading: Builder(
+          builder: (context) =>
+              IconButton(
+                icon: const Icon(Icons.menu), // Icon to represent the drawer
+                onPressed: () {
+                  Scaffold.of(context).openDrawer(); // Open the drawer
+                },
+              ),
+        ),
+        backgroundColor: appThemeColor,
       ),
+      //drawer: const AppDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(

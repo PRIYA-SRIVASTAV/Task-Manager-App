@@ -26,6 +26,7 @@ class _User_ProfilePageState extends State<User_ProfilePage> {
     super.initState();
     get_user_details_method();
   }
+
   File? profileImage;
 
   Future getProfileImage(ImageSource source) async {
@@ -46,33 +47,34 @@ class _User_ProfilePageState extends State<User_ProfilePage> {
   Widget imageWidget() {
     return profileImage == null
         ? Container(
-      height: 20.h,
-      width: 20.w,
-      decoration: const BoxDecoration(
-        color: Colors.red,
-        shape: BoxShape.circle,
-        image: DecorationImage(
-          fit: BoxFit.fill,
-          image: AssetImage("assets/images/3135715.png"),
-        ),
-      ),
-    )
+            height: 20.h,
+            width: 20.w,
+            decoration: const BoxDecoration(
+              color: Colors.red,
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage("assets/images/3135715.png"),
+              ),
+            ),
+          )
         : Container(
-      height: 20.h,
-      width: 20.w,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.circle,
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Image.file(
-          profileImage!,
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
+            height: 20.h,
+            width: 20.w,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.file(
+                profileImage!,
+                fit: BoxFit.cover,
+              ),
+            ),
+          );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,7 +129,7 @@ class _User_ProfilePageState extends State<User_ProfilePage> {
                     fontSize: 14.sp),
               ),
               SizedBox(
-                height:0.5.h,
+                height: 0.5.h,
               ),
               Text(
                 "${get_user_details.data!.email.toString()}",
@@ -137,27 +139,28 @@ class _User_ProfilePageState extends State<User_ProfilePage> {
                 height: 2.h,
               ),
               SizedBox(
-                  width: 30.w,
-                  height:5.h,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                            const edit_Page(),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: appThemeColor3,
-                        side: BorderSide.none,
-                        shape: const StadiumBorder(),
+                width: 30.w,
+                height: 5.h,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const edit_Page(),
                       ),
-                      child: const Text(
-                        "Edit Profile",
-                        style: TextStyle(color: Colors.white),
-                      ))),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: appThemeColor3,
+                    side: BorderSide.none,
+                    shape: const StadiumBorder(),
+                  ),
+                  child: const Text(
+                    "Edit Profile",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 2.h,
               ),
@@ -168,12 +171,13 @@ class _User_ProfilePageState extends State<User_ProfilePage> {
                 height: 2.h,
               ),
               ListTile(
-                onTap: ()async{
-                  SharedPreferences preferences = await SharedPreferences.getInstance();
+                onTap: () async {
+                  SharedPreferences preferences =
+                      await SharedPreferences.getInstance();
                   await preferences.clear();
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (c) => Welcome_Page()),
-                          (route) => false);
+                      (route) => false);
                 },
                 leading: Container(
                   height: 10.w,
@@ -182,7 +186,10 @@ class _User_ProfilePageState extends State<User_ProfilePage> {
                     borderRadius: BorderRadius.circular(100),
                     color: appThemeColor2.withOpacity(0.1),
                   ),
-                  child:  Icon(Icons.logout,color: appThemeColor2,),
+                  child: Icon(
+                    Icons.logout,
+                    color: appThemeColor2,
+                  ),
                 ),
                 title: Text(
                   "Logout",
@@ -197,7 +204,10 @@ class _User_ProfilePageState extends State<User_ProfilePage> {
                     borderRadius: BorderRadius.circular(100),
                     color: appThemeColor2.withOpacity(0.1),
                   ),
-                  child:  Icon(Icons.arrow_forward_ios,color: appThemeColor2,),
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    color: appThemeColor2,
+                  ),
                 ),
               ),
               ListTile(
@@ -208,7 +218,10 @@ class _User_ProfilePageState extends State<User_ProfilePage> {
                     borderRadius: BorderRadius.circular(100),
                     color: appThemeColor2.withOpacity(0.1),
                   ),
-                  child:  Icon(Icons.settings_suggest_outlined,color: appThemeColor2,),
+                  child: Icon(
+                    Icons.settings_suggest_outlined,
+                    color: appThemeColor2,
+                  ),
                 ),
                 title: Text(
                   "Settings",
@@ -223,7 +236,10 @@ class _User_ProfilePageState extends State<User_ProfilePage> {
                     borderRadius: BorderRadius.circular(100),
                     color: appThemeColor2.withOpacity(0.1),
                   ),
-                  child:  Icon(Icons.arrow_forward_ios,color: appThemeColor2,),
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    color: appThemeColor2,
+                  ),
                 ),
               ),
             ],
@@ -232,8 +248,10 @@ class _User_ProfilePageState extends State<User_ProfilePage> {
       ),
     );
   }
+
   void get_user_details_method() async {
-    get_user_details = await get_user_details_controller().get_user_details_controller_method();
+    get_user_details = await get_user_details_controller()
+        .get_user_details_controller_method();
     if (get_user_details.status.toString() == "200") {
       setState(() {
         is_load_get_user_detail = true;
@@ -241,4 +259,3 @@ class _User_ProfilePageState extends State<User_ProfilePage> {
     }
   }
 }
-

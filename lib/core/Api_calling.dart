@@ -189,22 +189,13 @@ class ApiCalling {
   }
 
   /// api for update profile
-  Future Admin_update_Profile_data(firstname, lastname, mobile_no, address, city, state, zip, country, dob, your_profession, user_id) async {
+  Future Admin_update_Profile_data(name,user_id) async {
     if (await isConnectedToInternet()) {
       try {
         Uri Admin_update_profile_Url = Uri.parse(ApiEndpoints.Update_profile_data);
         var map = {
           "id": user_id,
-          "first_name": firstname,
-          "last_name": lastname,
-          "phone": mobile_no,
-          "address": address,
-          "city": city,
-          "state": state,
-          "zip_code": zip,
-          "country": country,
-          "dob": dob,
-          "profession": your_profession,
+          "name": name,
         };
         var Admin_update_profile_Response = await client.post(Admin_update_profile_Url,
             body: map, headers: await headerWithoutContentType());
@@ -395,7 +386,7 @@ class ApiCalling {
     try {
       if (await isConnectedToInternet()) {
         Uri get_Admin_Details_Uri =
-        Uri.parse("${ApiEndpoints.get_Admin_User_details_Url}$id");
+        Uri.parse("${ApiEndpoints.get_Admin_details_Url}$id");
         var get_Admin_Details_Response = await client
             .get(get_Admin_Details_Uri, headers: await headerWithContentType());
         MYAPILOGS("Get Admin details api", get_Admin_Details_Response);
@@ -414,7 +405,7 @@ class ApiCalling {
     try {
       if (await isConnectedToInternet()) {
         Uri get_User_Details_Uri =
-        Uri.parse("${ApiEndpoints.get_Admin_User_details_Url}$id");
+        Uri.parse("${ApiEndpoints.get_User_details_Url}$id");
         var get_User_Details_Response = await client
             .get(get_User_Details_Uri, headers: await headerWithContentType());
         MYAPILOGS("Get User details api", get_User_Details_Response);
