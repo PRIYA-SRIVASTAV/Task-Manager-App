@@ -48,14 +48,10 @@ Widget BackGround_Images() {
     ),
   );
 }
+bool passwordVisible=true;
 
 Widget textFieldContainer(controller, context, text, icons) {
   return TextFormField(
-    onChanged: (value) {
-      // setState(() {
-      //   textValue = value;
-      // });
-    },
     onTap: () {},
     controller: controller,
     cursorColor: appThemeColor,

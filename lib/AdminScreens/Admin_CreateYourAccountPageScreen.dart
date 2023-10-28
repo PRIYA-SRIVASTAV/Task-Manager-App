@@ -19,6 +19,26 @@ class _Admin_CreateYourAccountPageScreenState
   TextEditingController name = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
 
+  bool isPasswordValid(String password) {
+    if (password.length < 8) {
+      return false; // Password is too short
+    }
+
+    if (!password.contains(RegExp(r'[A-Z]'))) {
+      return false; // Password doesn't contain an uppercase letter
+    }
+
+    if (!password.contains(RegExp(r'[a-z]'))) {
+      return false; // Password doesn't contain a lowercase letter
+    }
+
+    if (!password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+      return false; // Password doesn't contain a special character
+    }
+
+    return true;
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -27,13 +47,13 @@ class _Admin_CreateYourAccountPageScreenState
     name.dispose();
     confirmPassword.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: Stack(
           children: [
-            //BackGround_Images(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 4.h, vertical: 10.h),
               child: SingleChildScrollView(
@@ -43,7 +63,6 @@ class _Admin_CreateYourAccountPageScreenState
                     SizedBox(
                       height: 5.h,
                       width: 30.h,
-                      // color: Colors.grey,
                       child: Text(
                         "Create Account",
                         style: TextStyle(
@@ -61,20 +80,20 @@ class _Admin_CreateYourAccountPageScreenState
                     Text(
                       "Name",
                       style:
-                          TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
                     ),
                     SizedBox(
                       height: 1.h,
                     ),
-                    textFieldContainer(name, context, "Enter Your Name",
-                        Icons.drive_file_rename_outline),
+                    textFieldContainer(
+                        name, context, "Enter Your Name", Icons.drive_file_rename_outline),
                     SizedBox(
                       height: 2.h,
                     ),
                     Text(
                       "Email",
                       style:
-                          TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
                     ),
                     SizedBox(
                       height: 1.h,
@@ -87,26 +106,26 @@ class _Admin_CreateYourAccountPageScreenState
                     Text(
                       "Password",
                       style:
-                          TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
                     ),
                     SizedBox(
                       height: 1.h,
                     ),
-                    textFieldContainer(createPassword, context, "Enter Password",
-                        Icons.password),
+                    textFieldContainer(
+                        createPassword, context, "Enter Password", Icons.password),
                     SizedBox(
                       height: 2.h,
                     ),
                     Text(
                       "Confirm Password",
                       style:
-                          TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
                     ),
                     SizedBox(
                       height: 1.h,
                     ),
-                    textFieldContainer(confirmPassword, context,
-                        "Enter Confirm Password", Icons.password),
+                    textFieldContainer(
+                        confirmPassword, context, "Enter Confirm Password", Icons.password),
                     SizedBox(
                       height: 3.h,
                     ),
@@ -116,12 +135,19 @@ class _Admin_CreateYourAccountPageScreenState
                         width: 80.w,
                         child: FloatingActionButton(
                           onPressed: () {
-                            Admin_Register_Controller().admin_register_controller_method(
+                            if (!isPasswordValid(createPassword.text)) {
+
+                              customFlutterToast("Password Use : Max 8 chars, Min 1 Uppercase, Min 1 Lowercase, Min 1 Number");
+
+                            } else {
+                              Admin_Register_Controller().admin_register_controller_method(
                                 name.text,
                                 emailId.text,
                                 createPassword.text,
                                 confirmPassword.text,
-                                context);
+                                context,
+                              );
+                            }
                           },
                           backgroundColor: appThemeColor,
                           shape: OutlineInputBorder(

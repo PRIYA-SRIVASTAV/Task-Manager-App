@@ -17,12 +17,15 @@ class AdminLoginPage extends StatefulWidget {
 class _AdminLoginPageState extends State<AdminLoginPage> {
   TextEditingController adminUsername = TextEditingController();
   TextEditingController adminPassword = TextEditingController();
+  bool PasswordVisible = true;
+
   @override
   void dispose() {
     super.dispose();
     adminUsername.dispose();
     adminPassword.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -64,27 +67,51 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                     ),
                     Text(
                       "Email",
-                      style:
-                          TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                          fontSize: 14.sp, fontWeight: FontWeight.w600),
                     ),
                     SizedBox(
                       height: 0.5.h,
                     ),
-                    textFieldContainer(adminUsername, context, "Enter Your Email",
-                        Icons.mail_outline),
+                    textFieldContainer(adminUsername, context,
+                        "Enter Your Email", Icons.mail_outline),
                     SizedBox(
                       height: 1.h,
                     ),
                     Text(
                       "Password",
-                      style:
-                          TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                          fontSize: 14.sp, fontWeight: FontWeight.w600),
                     ),
                     SizedBox(
                       height: 1.h,
                     ),
-                    textFieldContainer(adminPassword, context,
-                        "Enter Your Password", Icons.remove_red_eye),
+                    TextFormField(
+                        obscureText: PasswordVisible,
+                        controller: adminPassword,
+                        cursorColor: appThemeColor,
+                        decoration: InputDecoration(
+                          suffixIcon: PasswordVisible
+                              ? Icon(Icons.visibility_off, color: appThemeColor)
+                              : Icon(Icons.visibility,
+                                  color: appThemeColor),
+                          hintText: "Enter your password",
+                          hintStyle:
+                              TextStyle(fontSize: 14.sp, color: appThemeColor),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: appThemeColor, width: 0.5.w),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
+                        onTap: () {
+                          setState(() {
+                            PasswordVisible = !PasswordVisible;
+                          });
+                        }),
                     SizedBox(
                       height: 0.5.h,
                     ),
@@ -113,8 +140,11 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                       width: 80.w,
                       child: FloatingActionButton(
                         onPressed: () {
-                          Admin_SignIn_Controller().Admin_signIn_controller_Method(
-                              adminUsername.text, adminPassword.text, context);
+                          Admin_SignIn_Controller()
+                              .Admin_signIn_controller_Method(
+                                  adminUsername.text,
+                                  adminPassword.text,
+                                  context);
                         },
                         backgroundColor: appThemeColor,
                         shape: OutlineInputBorder(

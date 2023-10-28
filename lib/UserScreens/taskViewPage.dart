@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:taskmanagerapp/UserScreens/alarmViewPage.dart';
 import 'package:taskmanagerapp/constants/color_constants.dart';
 
 import '../constants/String_constants.dart';
@@ -167,12 +168,15 @@ class _TaskViewPageState extends State<TaskViewPage> {
                           fontSize: 14.sp
                       ),
                     ),
-                    Text("${time.hour}:${time.minute}",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w700,color: Colors.black54),),
+                    // Text("${time.hour}:${time.minute}",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w700,color: Colors.black54),),
 
                     InkWell(
-                      onTap: (){
-                        _selectTime();
-                      },
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AlarmReminder()),
+                          );
+                        },
                         child: Icon((Icons.alarm))),
 
                   ],

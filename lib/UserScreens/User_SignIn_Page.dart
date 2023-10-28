@@ -16,6 +16,8 @@ class UserSignInPage extends StatefulWidget {
 class _UserSignInPageState extends State<UserSignInPage> {
   TextEditingController EmailController = TextEditingController();
   TextEditingController PasswordController = TextEditingController();
+
+  bool passwordVisible = true;
   @override
   void dispose() {
     super.dispose();
@@ -36,25 +38,6 @@ class _UserSignInPageState extends State<UserSignInPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Center(
-                      //   child: Text(
-                      //     "Task Manager",
-                      //     style: TextStyle(
-                      //         fontSize: 30.sp,
-                      //         fontWeight: FontWeight.bold,
-                      //         color: appThemeColor),
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 0.5.h,
-                      // ),
-                      // Text(
-                      //   "Simplify task management and prioritize work",
-                      //   style: TextStyle(
-                      //       fontSize: 12.sp,
-                      //       fontWeight: FontWeight.bold,
-                      //       color: appThemeColor),
-                      // ),
                       Container(
                         height: 40.h,
                         width: 100.w,
