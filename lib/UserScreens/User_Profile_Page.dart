@@ -84,168 +84,172 @@ class _User_ProfilePageState extends State<User_ProfilePage> {
         leading: const Icon(Icons.person),
         elevation: 15,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(2.h),
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  SizedBox(
-                    height: 20.h,
-                    width: 40.w,
-                    child: InkWell(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return openProfilePhoto(context);
+      body: is_load_get_user_detail == true
+          ? SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(2.h),
+                child: Column(
+                  children: [
+                    Stack(
+                      children: [
+                        SizedBox(
+                          height: 20.h,
+                          width: 40.w,
+                          child: InkWell(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return openProfilePhoto(context);
+                                  },
+                                );
+                              },
+                              child: imageWidget()),
+                        ),
+                        Positioned(
+                          bottom: 1.h,
+                          right: 1.w,
+                          child: InkWell(
+                            onTap: () {
+                              getProfileImage(ImageSource.gallery);
                             },
+                            child: Icon(
+                              Icons.camera_alt_rounded,
+                              color: appThemeColor,
+                              size: 26.sp,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      "${get_user_details.data.firstName.toString()} ${get_user_details.data.lastName.toString()}",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.sp),
+                    ),
+                    SizedBox(
+                      height: 0.5.h,
+                    ),
+                    Text(
+                      get_user_details.data.email.toString(),
+                      style: TextStyle(color: Colors.black, fontSize: 14.sp),
+                    ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    SizedBox(
+                      width: 30.w,
+                      height: 5.h,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const edit_Page(),
+                            ),
                           );
                         },
-                        child: imageWidget()),
-                  ),
-                  Positioned(
-                    bottom: 1.h,
-                    right: 1.w,
-                    child: InkWell(
-                      onTap: () {
-                        getProfileImage(ImageSource.gallery);
-                      },
-                      child: Icon(
-                        Icons.camera_alt_rounded,
-                        color: appThemeColor,
-                        size: 26.sp,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: appThemeColor3,
+                          side: BorderSide.none,
+                          shape: const StadiumBorder(),
+                        ),
+                        child: const Text(
+                          "Edit Profile",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Text(
-                "${get_user_details.data!.firstName.toString()} ${get_user_details.data!.lastName.toString()}",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.sp),
-              ),
-              SizedBox(
-                height: 0.5.h,
-              ),
-              Text(
-                "${get_user_details.data!.email.toString()}",
-                style: TextStyle(color: Colors.black, fontSize: 14.sp),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              SizedBox(
-                width: 30.w,
-                height: 5.h,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const edit_Page(),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    const Divider(
+                      color: Colors.grey,
+                    ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    ListTile(
+                      onTap: () async {
+                        SharedPreferences preferences =
+                            await SharedPreferences.getInstance();
+                        await preferences.clear();
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (c) => const Welcome_Page()),
+                            (route) => false);
+                      },
+                      leading: Container(
+                        height: 10.w,
+                        width: 10.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: appThemeColor2.withOpacity(0.1),
+                        ),
+                        child: Icon(
+                          Icons.logout,
+                          color: appThemeColor2,
+                        ),
                       ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: appThemeColor3,
-                    side: BorderSide.none,
-                    shape: const StadiumBorder(),
-                  ),
-                  child: const Text(
-                    "Edit Profile",
-                    style: TextStyle(color: Colors.white),
-                  ),
+                      title: Text(
+                        "Logout",
+                        style: TextStyle(
+                          color: appThemeColor.withOpacity(0.5),
+                        ),
+                      ),
+                      trailing: Container(
+                        width: 10.w,
+                        height: 10.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: appThemeColor2.withOpacity(0.1),
+                        ),
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          color: appThemeColor2,
+                        ),
+                      ),
+                    ),
+                    ListTile(
+                      leading: Container(
+                        height: 10.w,
+                        width: 10.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: appThemeColor2.withOpacity(0.1),
+                        ),
+                        child: Icon(
+                          Icons.settings_suggest_outlined,
+                          color: appThemeColor2,
+                        ),
+                      ),
+                      title: Text(
+                        "Settings",
+                        style: TextStyle(
+                          color: appThemeColor.withOpacity(0.5),
+                        ),
+                      ),
+                      trailing: Container(
+                        width: 10.w,
+                        height: 10.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: appThemeColor2.withOpacity(0.1),
+                        ),
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          color: appThemeColor2,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(
-                height: 2.h,
-              ),
-              const Divider(
-                color: Colors.grey,
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              ListTile(
-                onTap: () async {
-                  SharedPreferences preferences =
-                      await SharedPreferences.getInstance();
-                  await preferences.clear();
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (c) => Welcome_Page()),
-                      (route) => false);
-                },
-                leading: Container(
-                  height: 10.w,
-                  width: 10.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: appThemeColor2.withOpacity(0.1),
-                  ),
-                  child: Icon(
-                    Icons.logout,
-                    color: appThemeColor2,
-                  ),
-                ),
-                title: Text(
-                  "Logout",
-                  style: TextStyle(
-                    color: appThemeColor.withOpacity(0.5),
-                  ),
-                ),
-                trailing: Container(
-                  width: 10.w,
-                  height: 10.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: appThemeColor2.withOpacity(0.1),
-                  ),
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                    color: appThemeColor2,
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: Container(
-                  height: 10.w,
-                  width: 10.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: appThemeColor2.withOpacity(0.1),
-                  ),
-                  child: Icon(
-                    Icons.settings_suggest_outlined,
-                    color: appThemeColor2,
-                  ),
-                ),
-                title: Text(
-                  "Settings",
-                  style: TextStyle(
-                    color: appThemeColor.withOpacity(0.5),
-                  ),
-                ),
-                trailing: Container(
-                  width: 10.w,
-                  height: 10.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: appThemeColor2.withOpacity(0.1),
-                  ),
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                    color: appThemeColor2,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+            )
+          : const Center(
+              child: CircularProgressIndicator(),
+            ),
     );
   }
 

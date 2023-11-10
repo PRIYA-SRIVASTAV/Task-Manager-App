@@ -9,72 +9,72 @@ GetUserDetailsModel getUserDetailsModelFromJson(String str) => GetUserDetailsMod
 String getUserDetailsModelToJson(GetUserDetailsModel data) => json.encode(data.toJson());
 
 class GetUserDetailsModel {
-  int? status;
-  Data? data;
-  String? message;
+  int status;
+  Data data;
+  String message;
 
   GetUserDetailsModel({
-    this.status,
-    this.data,
-    this.message,
+    required this.status,
+    required this.data,
+    required this.message,
   });
 
   factory GetUserDetailsModel.fromJson(Map<String, dynamic> json) => GetUserDetailsModel(
     status: json["status"],
-    data: json["data"] == null ? null : Data.fromJson(json["data"]),
+    data: Data.fromJson(json["data"]),
     message: json["message"],
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
-    "data": data?.toJson(),
+    "data": data.toJson(),
     "message": message,
   };
 }
 
 class Data {
-  int? id;
-  String? username;
-  String? name;
-  String? firstName;
-  String? lastName;
-  String? gender;
-  DateTime? dob;
-  String? address;
-  String? city;
-  String? state;
-  String? zipCode;
-  String? country;
-  String? profession;
-  String? email;
-  DateTime? emailVerifiedAt;
-  int? phone;
-  String? image;
-  DateTime? updatedAt;
-  DateTime? createdAt;
-  int? roleId;
+  int id;
+  String username;
+  String name;
+  String firstName;
+  String lastName;
+  String gender;
+  String dob;
+  String address;
+  String city;
+  String state;
+  String zipCode;
+  String country;
+  String profession;
+  String email;
+  DateTime emailVerifiedAt;
+  String phone;
+  String image;
+  DateTime updatedAt;
+  DateTime createdAt;
+  String userType;
 
   Data({
-    this.id,
-    this.username,
-    this.name,
-    this.firstName,
-    this.lastName,
-    this.gender,
-    this.dob,
-    this.address,
-    this.city,
-    this.state,
-    this.zipCode,
-    this.country,
-    this.profession,
-    this.email,
-    this.emailVerifiedAt,
-    this.phone,
-    this.image,
-    this.updatedAt,
-    this.createdAt,
-    this.roleId,
+    required this.id,
+    required this.username,
+    required this.name,
+    required this.firstName,
+    required this.lastName,
+    required this.gender,
+    required this.dob,
+    required this.address,
+    required this.city,
+    required this.state,
+    required this.zipCode,
+    required this.country,
+    required this.profession,
+    required this.email,
+    required this.emailVerifiedAt,
+    required this.phone,
+    required this.image,
+    required this.updatedAt,
+    required this.createdAt,
+    required this.userType,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -84,7 +84,7 @@ class Data {
     firstName: json["first_name"],
     lastName: json["last_name"],
     gender: json["gender"],
-    dob: json["dob"] == null ? null : DateTime.parse(json["dob"]),
+    dob: json["dob"],
     address: json["address"],
     city: json["city"],
     state: json["state"],
@@ -92,12 +92,12 @@ class Data {
     country: json["country"],
     profession: json["profession"],
     email: json["email"],
-    emailVerifiedAt: json["email_verified_at"] == null ? null : DateTime.parse(json["email_verified_at"]),
+    emailVerifiedAt: DateTime.parse(json["email_verified_at"]),
     phone: json["phone"],
     image: json["image"],
-    updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-    createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
-    roleId: json["role_id"],
+    updatedAt: DateTime.parse(json["updated_at"]),
+    createdAt: DateTime.parse(json["created_at"]),
+    userType: json["user_type"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -107,7 +107,7 @@ class Data {
     "first_name": firstName,
     "last_name": lastName,
     "gender": gender,
-    "dob": "${dob!.year.toString().padLeft(4, '0')}-${dob!.month.toString().padLeft(2, '0')}-${dob!.day.toString().padLeft(2, '0')}",
+    "dob": dob,
     "address": address,
     "city": city,
     "state": state,
@@ -115,11 +115,11 @@ class Data {
     "country": country,
     "profession": profession,
     "email": email,
-    "email_verified_at": emailVerifiedAt?.toIso8601String(),
+    "email_verified_at": emailVerifiedAt.toIso8601String(),
     "phone": phone,
     "image": image,
-    "updated_at": updatedAt?.toIso8601String(),
-    "created_at": createdAt?.toIso8601String(),
-    "role_id": roleId,
+    "updated_at": updatedAt.toIso8601String(),
+    "created_at": createdAt.toIso8601String(),
+    "user_type": userType,
   };
 }

@@ -112,9 +112,8 @@ class _edit_PageState extends State<edit_Page> {
                       ),
                       TextFormField(
                         controller: firstNameController,
-                        decoration:  InputDecoration(
+                        decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
-                          hintText: get_user_details.data?.firstName.toString(),
                         ),
                       ),
                       SizedBox(
@@ -130,9 +129,8 @@ class _edit_PageState extends State<edit_Page> {
                       ),
                       TextFormField(
                         controller: lastNamecontroller,
-                        decoration:  InputDecoration(
+                        decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
-                          hintText: get_user_details.data?.lastName.toString(),
                         ),
                       ),
                       SizedBox(
@@ -146,7 +144,7 @@ class _edit_PageState extends State<edit_Page> {
                       SizedBox(
                         height: 2.h,
                       ),
-                      Text("${get_user_details.data?.email.toString()}",
+                      Text("${get_user_details.data.email.toString()}",
                         style: TextStyle(color: Colors.grey, fontSize: 14.sp),
                       ),
                       SizedBox(
@@ -171,9 +169,9 @@ class _edit_PageState extends State<edit_Page> {
                         controller: mobileController,
                         keyboardType: TextInputType.phone,
                         maxLength: 10,
-                        decoration:  InputDecoration(
+                        decoration: const InputDecoration(
                           counterText: "",
-                          hintText: '+91 ${get_user_details.data?.phone.toString()}',
+                          prefixText: "+91",
                           border: UnderlineInputBorder(),
                         ),
                       ),
@@ -190,8 +188,7 @@ class _edit_PageState extends State<edit_Page> {
                       ),
                       TextFormField(
                         controller: addressController,
-                        decoration:  InputDecoration(
-                          hintText: get_user_details.data?.address.toString(),
+                        decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                         ),
                       ),
@@ -208,8 +205,7 @@ class _edit_PageState extends State<edit_Page> {
                       ),
                       TextFormField(
                         controller: cityController,
-                        decoration:  InputDecoration(
-                          hintText: get_user_details.data?.city.toString(),
+                        decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                         ),
                       ),
@@ -226,8 +222,7 @@ class _edit_PageState extends State<edit_Page> {
                       ),
                       TextFormField(
                         controller: stateController,
-                        decoration:  InputDecoration(
-                          hintText: get_user_details.data?.state.toString(),
+                        decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                         ),
                       ),
@@ -244,8 +239,7 @@ class _edit_PageState extends State<edit_Page> {
                       ),
                       TextFormField(
                         controller: zipController,
-                        decoration:  InputDecoration(
-                          hintText: get_user_details.data?.zipCode.toString(),
+                        decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                         ),
                       ),
@@ -262,8 +256,7 @@ class _edit_PageState extends State<edit_Page> {
                       ),
                       TextFormField(
                         controller: countryController,
-                        decoration:  InputDecoration(
-                          hintText: get_user_details.data?.country.toString(),
+                        decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                         ),
                       ),
@@ -291,51 +284,49 @@ class _edit_PageState extends State<edit_Page> {
                       TextFormField(
                         controller: DOBController,
                         decoration: InputDecoration(
-                          hintText: get_user_details.data?.dob.toString().substring(0,10),
                           suffixIcon: InkWell(
-                            onTap: () async {
-                              DateTime? pickedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(1950),
-                                lastDate: DateTime(2100),
-                                helpText: "CHOOSE DATE OF BIRTH",
-                                builder: (context, child) {
-                                  return Theme(
-                                    data: Theme.of(context).copyWith(
-                                      colorScheme: ColorScheme.light(
-                                        primary: appThemeColor,
-                                        onPrimary: Colors.white,
-                                        onSurface: Colors.black,
-                                      ),
-                                      textButtonTheme: TextButtonThemeData(
-                                        style: TextButton.styleFrom(
-                                          foregroundColor:
-                                              Colors.green, // button text color
+                              onTap: () async {
+                                DateTime? pickedDate =
+                                await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1950),
+                                  lastDate: DateTime(2100),
+                                  helpText: "CHOOSE DATE OF BIRTH",
+                                  builder: (context, child) {
+                                    return Theme(
+                                      data: Theme.of(context).copyWith(
+                                        colorScheme: ColorScheme.light(
+                                          primary: appThemeColor,
+                                          onPrimary: Colors.white,
+                                          onSurface: Colors.black,
+                                        ),
+                                        textButtonTheme:
+                                        TextButtonThemeData(
+                                          style: TextButton.styleFrom(
+                                            foregroundColor: Colors
+                                                .green, // button text color
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    child: child!,
-                                  );
-                                },
-                              );
-                              if (pickedDate != null) {
-                                print(pickedDate);
-                                String formattedDate =
-                                    DateFormat('yyyy-MM-dd').format(pickedDate);
-                                print(formattedDate);
-                                setState(() {
-                                  DOBController.text =
-                                      formattedDate; //set output date to TextField value.
-                                });
-                              } else {}
-                            },
-                            child: Icon(
-                              Icons.calendar_month,
-                              color: appThemeColor,
-                            ),
-                          ),
-                          //border: UnderlineInputBorder(),
+                                      child: child!,
+                                    );
+                                  },
+                                );
+                                if (pickedDate != null) {
+                                  print(pickedDate);
+                                  String formattedDate =
+                                  DateFormat('yyyy-MM-dd')
+                                      .format(pickedDate);
+                                  print(formattedDate);
+                                  setState(() {
+                                    DOBController.text =
+                                        formattedDate; //set output date to TextField value.
+                                  });
+                                } else {}
+                              },
+                              child: Icon(Icons.calendar_month)),
+                          border: UnderlineInputBorder(),
                         ),
                       ),
                       SizedBox(
@@ -361,8 +352,7 @@ class _edit_PageState extends State<edit_Page> {
                       ),
                       TextFormField(
                         controller: professionController,
-                        decoration:  InputDecoration(
-                          hintText: get_user_details.data?.profession.toString(),
+                        decoration: InputDecoration(
                           border: UnderlineInputBorder(),
                         ),
                       ),
@@ -445,6 +435,16 @@ class _edit_PageState extends State<edit_Page> {
 
   void get_user_details_method() async {
     get_user_details = await get_user_details_controller().get_user_details_controller_method();
+    firstNameController.text = get_user_details.data.firstName.toString();
+    lastNamecontroller.text = get_user_details.data.lastName.toString();
+    mobileController.text = get_user_details.data.phone.toString();
+    addressController.text = get_user_details.data.address.toString();
+    cityController.text = get_user_details.data.city.toString();
+    stateController.text = get_user_details.data.state.toString();
+    zipController.text = get_user_details.data.zipCode.toString();
+    countryController.text = get_user_details.data.country.toString();
+    DOBController.text = get_user_details.data.dob.toString();
+    professionController.text = get_user_details.data.profession.toString();
     if (get_user_details.status.toString() == "200") {
       setState(() {
         is_load_get_user_detail = true;

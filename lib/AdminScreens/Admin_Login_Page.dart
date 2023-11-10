@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:taskmanagerapp/AdminScreens/Admin_Home_Page.dart';
 import 'package:taskmanagerapp/controller/Admin_Sign_In_Controller.dart';
 import 'package:taskmanagerapp/utils/helper_widgets.dart';
 import '../common_screens/Forgot_Password.dart';
@@ -17,6 +16,13 @@ class AdminLoginPage extends StatefulWidget {
 class _AdminLoginPageState extends State<AdminLoginPage> {
   TextEditingController adminUsername = TextEditingController();
   TextEditingController adminPassword = TextEditingController();
+  bool _obscureText = true;
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
   @override
   void dispose() {
     super.dispose();
@@ -83,8 +89,30 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                     SizedBox(
                       height: 1.h,
                     ),
-                    textFieldContainer(adminPassword, context,
-                        "Enter Your Password", Icons.remove_red_eye),
+                    TextFormField(
+                      onTap: () {},
+                      controller: adminPassword,
+                      obscureText: _obscureText,
+                      cursorColor: appThemeColor,
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          icon: Icon(_obscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility),
+                          color: appThemeColor,
+                          onPressed: _togglePasswordVisibility,
+                        ),
+                        hintText: "Enter Your Password",
+                        hintStyle: TextStyle(fontSize: 14.sp, color: appThemeColor),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: appThemeColor, width: 0.5.w),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       height: 0.5.h,
                     ),
